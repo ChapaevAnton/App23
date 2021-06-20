@@ -8,11 +8,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.app23.fruit.Fruit
-import com.example.app23.fruit.FruitAdapter
-import com.example.app23.fruit.FruitDiff
-import com.example.app23.fruit.ItemAnimatorFruit
-import java.util.*
+import com.example.app23.fruit.*
 import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
@@ -35,9 +31,9 @@ class MainActivity : AppCompatActivity() {
 
 
         // TODO: 19.06.2021 23.3 ItemAnimator1
-        val fruitAdapter = FruitAdapter(Fruit.getListFruit())
-        // TODO: 19.06.2021 23.4
-        fruitAdapter.setHasStableIds(true)
+        val fruitAdapter = FruitAdapter(ItemData.getListItem())
+        // TODO: 19.06.2021 23.4 StableIds
+        //fruitAdapter.setHasStableIds(true)
         mainRecyclerView.adapter = fruitAdapter
         mainRecyclerView.itemAnimator = ItemAnimatorFruit(this)
 
@@ -49,17 +45,17 @@ class MainActivity : AppCompatActivity() {
 
         add.setOnClickListener {
 
-            fruitAdapter.listFruit.add(
-                Fruit.getListFruit().random()
+            fruitAdapter.listItem.add(
+                ItemData.getListItem().random()
             )
-            fruitAdapter.notifyItemInserted(fruitAdapter.listFruit.lastIndex)
+            fruitAdapter.notifyItemInserted(fruitAdapter.listItem.lastIndex)
             mainRecyclerView.smoothScrollToPosition(fruitAdapter.itemCount)
         }
 
         remove.setOnClickListener {
-            if (fruitAdapter.listFruit.isNotEmpty()) {
-                fruitAdapter.listFruit.removeLast()
-                fruitAdapter.notifyItemRemoved(fruitAdapter.listFruit.size)
+            if (fruitAdapter.listItem.isNotEmpty()) {
+                fruitAdapter.listItem.removeLast()
+                fruitAdapter.notifyItemRemoved(fruitAdapter.listItem.size)
                 mainRecyclerView.smoothScrollToPosition(fruitAdapter.itemCount)
             } else Toast.makeText(this, "empty list", Toast.LENGTH_SHORT)
                 .apply { setGravity(Gravity.CENTER, 0, 0) }.show()
@@ -68,27 +64,27 @@ class MainActivity : AppCompatActivity() {
         // TODO: 19.06.2021 23.4
         update.setOnClickListener {
             //StableIds
-            fruitAdapter.listFruit[0].idIcon = R.drawable.ic_lemon
-            fruitAdapter.notifyItemChanged(0, "icon")
+//            fruitAdapter.listItem[0].idIcon = R.drawable.ic_lemon
+//            fruitAdapter.notifyItemChanged(0, "icon")
 
             //DiffUtil
             //Вычислить Diff и получить DiffResult:
-            val diffFruit = FruitDiff(Fruit.getListFruitUpdate(), fruitAdapter.listFruit)
-            val diffResult = DiffUtil.calculateDiff(diffFruit)
+//            val diffFruit = FruitDiff(ItemData.getListItemUpdate(), fruitAdapter.listItem)
+//            val diffResult = DiffUtil.calculateDiff(diffFruit)
 
             //Обновить данные и оповестить об этом RecyclerView:
-            fruitAdapter.listFruit = Fruit.getListFruitUpdate()
-            diffResult.dispatchUpdatesTo(fruitAdapter)
+//            fruitAdapter.listItem = ItemData.getListItemUpdate()
+//            diffResult.dispatchUpdatesTo(fruitAdapter)
         }
 
         shuffle.setOnClickListener {
-            val shuffleListFruit = ArrayList<Fruit>(fruitAdapter.listFruit.shuffled())
-
-            val diffFruitShuffle = FruitDiff(shuffleListFruit, fruitAdapter.listFruit)
-            val diffFruitShuffleResult = DiffUtil.calculateDiff(diffFruitShuffle)
-
-            fruitAdapter.listFruit = shuffleListFruit
-            diffFruitShuffleResult.dispatchUpdatesTo(fruitAdapter)
+//            val shuffleListFruit = ArrayList<FruitModel>(fruitAdapter.listItem.shuffled())
+//
+//            val diffFruitShuffle = FruitDiff(shuffleListFruit, fruitAdapter.listItem)
+//            val diffFruitShuffleResult = DiffUtil.calculateDiff(diffFruitShuffle)
+//            fruitAdapter.listItem.clear()
+//            fruitAdapter.listItem.addAll(shuffleListFruit)
+//            diffFruitShuffleResult.dispatchUpdatesTo(fruitAdapter)
         }
 
         // TODO: 17.06.2021 23.2
