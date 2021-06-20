@@ -1,12 +1,13 @@
 package com.example.app23
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Gravity
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.app23.fruit.*
 import com.example.app23.fruit.data.ItemData
@@ -38,6 +39,26 @@ class MainActivity : AppCompatActivity() {
         mainRecyclerView.adapter = itemAdapter
         mainRecyclerView.itemAnimator = ItemAnimatorFruit(this)
 
+        // TODO: 20.06.2021 23.6. Работа со скроллом
+        var isLoading = false
+        mainRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val layoutManager = recyclerView.layoutManager as RecyclerView.LayoutManager
+                val visibleItemCount: Int =
+                    layoutManager.childCount //смотрим сколько элементов на экране
+                val totalItemCount: Int = layoutManager.itemCount //сколько всего элементов
+                val firstVisibleItems: Int =
+                    (recyclerView.layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition() //какая позиция первого элемента
+
+                if (!isLoading) { //проверяем, грузим мы что-то или нет, эта переменная должна быть вне класса  OnScrollListener
+                    if (visibleItemCount + firstVisibleItems >= totalItemCount) {
+                        isLoading = true //ставим флаг что мы попросили еще элемены
+                            //load data
+                    }
+                }
+            }
+        })
 
         val add = findViewById<Button>(R.id.add)
         val remove = findViewById<Button>(R.id.remove)
