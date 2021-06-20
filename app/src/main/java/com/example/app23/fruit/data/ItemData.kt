@@ -1,4 +1,4 @@
-package com.example.app23.fruit
+package com.example.app23.fruit.data
 
 import com.example.app23.R
 
@@ -14,7 +14,8 @@ class ItemData {
                 FruitModel(3, R.drawable.ic_pear, "Pear", "Under favorable conditions, the pear reaches a large size-up to 5-25 meters in height and 5 meters in diameter of the crown."),
                 AdModel("АКЦИЯ","Скидки до 30%"),
                 FruitModel(4, R.drawable.ic_strawberry, "Strawberry", "A perennial herbaceous plant 5-20 cm high, with a thick brown rhizome. \"Mustache\" is short. The stem is thin."),
-                FruitModel(5, R.drawable.ic_orange, "Orange", "Orange juice is widely used as a drink in restaurants and cafes."))
+                FruitModel(5, R.drawable.ic_orange, "Orange", "Orange juice is widely used as a drink in restaurants and cafes.")
+            )
         }
 
         fun getListItemUpdate():ArrayList<ItemModel>{
@@ -24,7 +25,8 @@ class ItemData {
                 FruitModel(2, R.drawable.ic_apple, "Apple0", "update0"),
                 FruitModel(3, R.drawable.ic_banana, "Banana1", "update1"),
                 FruitModel(4, R.drawable.ic_lemon, "Lemon2", "update2"),
-                FruitModel(5, R.drawable.ic_orange, "Orange", "Orange juice is widely used as a drink in restaurants and cafes."))
+                FruitModel(5, R.drawable.ic_orange, "Orange", "Orange juice is widely used as a drink in restaurants and cafes.")
+            )
         }
 
     }

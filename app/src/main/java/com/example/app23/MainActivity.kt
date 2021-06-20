@@ -6,10 +6,9 @@ import android.view.Gravity
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.Toast
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.app23.fruit.*
-import kotlin.collections.ArrayList
+import com.example.app23.fruit.data.ItemData
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,10 +30,10 @@ class MainActivity : AppCompatActivity() {
 
 
         // TODO: 19.06.2021 23.3 ItemAnimator1
-        val fruitAdapter = FruitAdapter(ItemData.getListItem())
+        val itemAdapter = ItemAdapter(ItemData.getListItem())
         // TODO: 19.06.2021 23.4 StableIds
         //fruitAdapter.setHasStableIds(true)
-        mainRecyclerView.adapter = fruitAdapter
+        mainRecyclerView.adapter = itemAdapter
         mainRecyclerView.itemAnimator = ItemAnimatorFruit(this)
 
 
@@ -45,18 +44,18 @@ class MainActivity : AppCompatActivity() {
 
         add.setOnClickListener {
 
-            fruitAdapter.listItem.add(
+            itemAdapter.listItem.add(
                 ItemData.getListItem().random()
             )
-            fruitAdapter.notifyItemInserted(fruitAdapter.listItem.lastIndex)
-            mainRecyclerView.smoothScrollToPosition(fruitAdapter.itemCount)
+            itemAdapter.notifyItemInserted(itemAdapter.listItem.lastIndex)
+            mainRecyclerView.smoothScrollToPosition(itemAdapter.itemCount)
         }
 
         remove.setOnClickListener {
-            if (fruitAdapter.listItem.isNotEmpty()) {
-                fruitAdapter.listItem.removeLast()
-                fruitAdapter.notifyItemRemoved(fruitAdapter.listItem.size)
-                mainRecyclerView.smoothScrollToPosition(fruitAdapter.itemCount)
+            if (itemAdapter.listItem.isNotEmpty()) {
+                itemAdapter.listItem.removeLast()
+                itemAdapter.notifyItemRemoved(itemAdapter.listItem.size)
+                mainRecyclerView.smoothScrollToPosition(itemAdapter.itemCount)
             } else Toast.makeText(this, "empty list", Toast.LENGTH_SHORT)
                 .apply { setGravity(Gravity.CENTER, 0, 0) }.show()
         }

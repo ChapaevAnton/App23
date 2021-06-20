@@ -1,6 +1,7 @@
 package com.example.app23.fruit
 
 import androidx.recyclerview.widget.DiffUtil
+import com.example.app23.fruit.data.FruitModel
 
 // TODO: 19.06.2021 23.4 DiffUtil 
 class FruitDiff(private val newListFruit: ArrayList<FruitModel>, private val oldListFruit: ArrayList<FruitModel>) :

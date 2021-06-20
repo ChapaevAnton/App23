@@ -1,4 +1,4 @@
-package com.example.app23.fruit
+package com.example.app23.fruit.data
 
 import androidx.annotation.DrawableRes
 
@@ -8,4 +8,4 @@ data class FruitModel(
     var idIcon: Int,
     val name: String,
     val description: String
-):ItemModel
+): ItemModel
