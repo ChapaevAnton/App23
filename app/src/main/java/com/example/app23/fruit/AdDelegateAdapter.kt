@@ -20,8 +20,8 @@ class AdDelegateAdapter :
         private val adDescription: TextView? = itemAd.findViewById(R.id.ad_description)
 
         fun onBindAd(adModel: AdModel) {
-            adTitle?.text = adModel.adTitle
-            adDescription?.text = adModel.adDescription
+            adTitle?.text = adModel.name
+            adDescription?.text = adModel.description
         }
 
     }

@@ -3,7 +3,7 @@ package com.example.app23.fruit
 import com.example.app23.fruit.data.ItemModel
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 
-class ItemAdapter(val listItem: ArrayList<ItemModel>) : ListDelegationAdapter<List<ItemModel>>() {
+class ItemAdapter(var listItem: ArrayList<ItemModel>) : ListDelegationAdapter<List<ItemModel>>() {
 
     init {
         delegatesManager.addDelegate(FruitDelegateAdapter())

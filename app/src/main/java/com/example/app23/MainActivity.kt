@@ -6,9 +6,11 @@ import android.view.Gravity
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.Toast
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.app23.fruit.*
 import com.example.app23.fruit.data.ItemData
+import com.example.app23.fruit.data.ItemModel
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,22 +70,22 @@ class MainActivity : AppCompatActivity() {
 
             //DiffUtil
             //Вычислить Diff и получить DiffResult:
-//            val diffFruit = FruitDiff(ItemData.getListItemUpdate(), fruitAdapter.listItem)
-//            val diffResult = DiffUtil.calculateDiff(diffFruit)
+            val diffFruit = ItemDiff(ItemData.getListItemUpdate(), itemAdapter.listItem)
+            val diffResult = DiffUtil.calculateDiff(diffFruit)
 
             //Обновить данные и оповестить об этом RecyclerView:
-//            fruitAdapter.listItem = ItemData.getListItemUpdate()
-//            diffResult.dispatchUpdatesTo(fruitAdapter)
+            itemAdapter.listItem = ItemData.getListItemUpdate()
+            diffResult.dispatchUpdatesTo(itemAdapter)
         }
 
         shuffle.setOnClickListener {
-//            val shuffleListFruit = ArrayList<FruitModel>(fruitAdapter.listItem.shuffled())
-//
-//            val diffFruitShuffle = FruitDiff(shuffleListFruit, fruitAdapter.listItem)
-//            val diffFruitShuffleResult = DiffUtil.calculateDiff(diffFruitShuffle)
-//            fruitAdapter.listItem.clear()
-//            fruitAdapter.listItem.addAll(shuffleListFruit)
-//            diffFruitShuffleResult.dispatchUpdatesTo(fruitAdapter)
+            val shuffleListFruit = ArrayList<ItemModel>(itemAdapter.listItem.shuffled())
+
+            val diffFruitShuffle = ItemDiff(shuffleListFruit, itemAdapter.listItem)
+            val diffFruitShuffleResult = DiffUtil.calculateDiff(diffFruitShuffle)
+            itemAdapter.listItem.clear()
+            itemAdapter.listItem.addAll(shuffleListFruit)
+            diffFruitShuffleResult.dispatchUpdatesTo(itemAdapter)
         }
 
         // TODO: 17.06.2021 23.2
