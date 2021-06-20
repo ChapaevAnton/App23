@@ -10,6 +10,8 @@ class ItemData {
                 FruitModel(0, R.drawable.ic_apple, "Apple", "Juicy Apple fruit, which is eaten fresh, serves as a raw material in cooking and for making drinks."),
                 FruitModel(1, R.drawable.ic_banana, "Banana", "It is one of the oldest food crops, and for tropical countries it is the most important food plant and the main export item."),
                 AdModel("РЕКЛАМА","Сегодня у нас распродажа"),
+                ProductModel(6,R.drawable.ic_units_24,"Смартфон","Супер новый смартфон",10),
+                ProductModel(7,R.drawable.ic_alarms_24,"Будильник","Будильник самый громкий",5),
                 FruitModel(2, R.drawable.ic_lemon, "Lemon", "Lemons are eaten fresh, and are also used in the manufacture of confectionery and soft drinks, in the liquor and perfume industry."),
                 FruitModel(3, R.drawable.ic_pear, "Pear", "Under favorable conditions, the pear reaches a large size-up to 5-25 meters in height and 5 meters in diameter of the crown."),
                 AdModel("АКЦИЯ","Скидки до 30%"),

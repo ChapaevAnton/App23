@@ -6,8 +6,9 @@ import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 class ItemAdapter(val listItem: ArrayList<ItemModel>) : ListDelegationAdapter<List<ItemModel>>() {
 
     init {
-        delegatesManager.addDelegate(ProductDelegateAdapter())
+        delegatesManager.addDelegate(FruitDelegateAdapter())
         delegatesManager.addDelegate(AdDelegateAdapter())
+        delegatesManager.addDelegate(ProductDelegateAdapter())
         setItems(listItem)
     }
 

@@ -7,24 +7,29 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.app23.R
-import com.example.app23.fruit.data.FruitModel
 import com.example.app23.fruit.data.ItemModel
+import com.example.app23.fruit.data.ProductModel
 import com.hannesdorfmann.adapterdelegates4.AbsListItemAdapterDelegate
-import org.jetbrains.annotations.NotNull
 
 class ProductDelegateAdapter :
-    AbsListItemAdapterDelegate<FruitModel, ItemModel, ProductDelegateAdapter.FruitHolder>() {
+    AbsListItemAdapterDelegate<ProductModel, ItemModel, ProductDelegateAdapter.ProductHolder>() {
 
-    inner class FruitHolder(@NotNull itemFruit: View) : RecyclerView.ViewHolder(itemFruit) {
-        private val icon: ImageView? = itemFruit.findViewById(R.id.icon)
-        private val name: TextView? = itemFruit.findViewById(R.id.text_name)
-        private val description: TextView? = itemFruit.findViewById(R.id.text_description)
 
-        fun onBindFruit(fruitModel: FruitModel) {
-            icon?.setImageResource(fruitModel.idIcon)
-            name?.text = fruitModel.name
-            description?.text = fruitModel.description
+    inner class ProductHolder(itemProduct: View) : RecyclerView.ViewHolder(itemProduct) {
+
+        private val iconCount: ImageView? = itemProduct.findViewById(R.id.icon_count)
+        private val textCount: TextView? = itemProduct.findViewById(R.id.text_count)
+        private val textNameCount: TextView? = itemProduct.findViewById(R.id.text_name_count)
+        private val textDescriptionCount: TextView? =
+            itemProduct.findViewById(R.id.text_description_count)
+
+        fun onBindProduct(productModel: ProductModel) {
+            iconCount?.setImageResource(productModel.idIcon)
+            textCount?.text = productModel.count.toString()
+            textNameCount?.text = productModel.name
+            textDescriptionCount?.text = productModel.description
         }
+
     }
 
     override fun isForViewType(
@@ -32,21 +37,20 @@ class ProductDelegateAdapter :
         items: MutableList<ItemModel>,
         position: Int
     ): Boolean {
-        return item is FruitModel
+        return item is ProductModel
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup): FruitHolder {
-        return FruitHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_fruit, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup): ProductHolder {
+        return ProductHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_countable, parent, false)
         )
     }
 
     override fun onBindViewHolder(
-        item: FruitModel,
-        holder: FruitHolder,
+        item: ProductModel,
+        holder: ProductHolder,
         payloads: MutableList<Any>
     ) {
-        holder.onBindFruit(item)
+        holder.onBindProduct(item)
     }
-
 }
