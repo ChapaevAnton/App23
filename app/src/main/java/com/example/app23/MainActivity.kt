@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
                 if (!isLoading) { //проверяем, грузим мы что-то или нет, эта переменная должна быть вне класса  OnScrollListener
                     if (visibleItemCount + firstVisibleItems >= totalItemCount) {
                         isLoading = true //ставим флаг что мы попросили еще элемены
-                            //load data
+                        //load data
                     }
                 }
             }
@@ -108,6 +108,50 @@ class MainActivity : AppCompatActivity() {
             itemAdapter.listItem.addAll(shuffleListFruit)
             diffFruitShuffleResult.dispatchUpdatesTo(itemAdapter)
         }
+        // TODO: 21.06.2021 23.6 Практика Up Save Down
+        val upPage = findViewById<Button>(R.id.up_page)
+        val downPage = findViewById<Button>(R.id.down_page)
+        val savePage = findViewById<Button>(R.id.save_page)
+        val layoutManager = mainRecyclerView.layoutManager as LinearLayoutManager
+
+        var savePositionFirst = 0
+        var savePositionLast = 0
+
+        fun savePosition() {
+            savePositionFirst = layoutManager.findFirstCompletelyVisibleItemPosition()
+            savePositionLast = layoutManager.findLastCompletelyVisibleItemPosition()
+        }
+
+        fun scrollToStart() {
+            mainRecyclerView.scrollToPosition(0)
+        }
+
+        fun scrollToSaveStartPosition() {
+            mainRecyclerView.scrollToPosition(savePositionFirst)
+        }
+
+        fun scrollToSaveLastPosition() {
+            mainRecyclerView.scrollToPosition(savePositionLast)
+        }
+
+        fun scrollToEnd() {
+            mainRecyclerView.scrollToPosition(itemAdapter.itemCount - 1)
+        }
+        upPage.setOnClickListener {
+            if (layoutManager.findFirstVisibleItemPosition() == 0) {
+                scrollToSaveLastPosition()
+            } else scrollToStart()
+        }
+        downPage.setOnClickListener {
+            if (layoutManager.findLastVisibleItemPosition() == itemAdapter.itemCount - 1) {
+                scrollToSaveStartPosition()
+            } else
+                scrollToEnd()
+        }
+        savePage.setOnClickListener {
+            savePosition()
+        }
+
 
         // TODO: 17.06.2021 23.2
 //        mainRecyclerView.layoutManager = GridLayoutManager(this,4)

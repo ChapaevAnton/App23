@@ -13,10 +13,40 @@
         android:orientation="vertical"
         android:padding="10dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/up_page" />
+
+    <Button
+        android:id="@+id/up_page"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="up"
+        app:layout_constraintBottom_toTopOf="@id/main_recycler_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/down_page"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/down_page"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="down"
+        app:layout_constraintBottom_toTopOf="@id/main_recycler_view"
+        app:layout_constraintStart_toEndOf="@id/up_page"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/add"/>
+        app:layout_constraintEnd_toStartOf="@id/save_page"/>
+
+    <Button
+        android:id="@+id/save_page"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="save"
+        app:layout_constraintBottom_toTopOf="@id/main_recycler_view"
+        app:layout_constraintStart_toEndOf="@id/down_page"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <Button
         android:id="@+id/add"
