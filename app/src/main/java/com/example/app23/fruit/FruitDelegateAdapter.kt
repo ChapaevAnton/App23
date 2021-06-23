@@ -47,6 +47,7 @@ class FruitDelegateAdapter :
         payloads: MutableList<Any>
     ) {
         holder.onBindFruit(item)
+
     }
 
 }

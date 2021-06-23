@@ -21,7 +21,7 @@ class ItemAdapter(var listItem: ArrayList<ItemModel>) : ListDelegationAdapter<Li
         return listItem.size
     }
 
-    // TODO: 19.06.2021 23.4 StableIds
+    // TODO: 19.06.2021 23.4 Payloads
 
 //    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int, payloads: MutableList<Any>) {
 //        if (payloads.isEmpty())

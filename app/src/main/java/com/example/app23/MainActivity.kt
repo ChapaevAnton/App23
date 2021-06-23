@@ -6,9 +6,7 @@ import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.*
 import com.example.app23.fruit.*
 import com.example.app23.fruit.data.ItemData
 import com.example.app23.fruit.data.ItemModel
@@ -25,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 //        val itemOffsetsDecoration = ItemOffsetsDecoration(this)
 //        mainRecyclerView.addItemDecoration(itemOffsetsDecoration)
 
+
         // TODO: 17.06.2021 23.3 LayoutAnimation
         val addItemAnimLayout =
             AnimationUtils.loadLayoutAnimation(this, R.anim.add_item_anim_layout)
@@ -35,9 +34,26 @@ class MainActivity : AppCompatActivity() {
         // TODO: 19.06.2021 23.3 ItemAnimator1
         val itemAdapter = ItemAdapter(ItemData.getListItem())
         // TODO: 19.06.2021 23.4 StableIds
-        //fruitAdapter.setHasStableIds(true)
+        //fruitAdapter.setHasStableIds(true) //notifyDataSetChanged() RecyclerView будет перерисовывать элементы, которые действительно изменились
+        //mainRecyclerView.setHasFixedSize(true) //RecyclerView имеет постоянный размер. Позволяет немного увеличить производительность
+        // Позволяет отключить поддержку вложенного скролла.
+        // Незначительно увеличивает производительность,
+        // но будьте осторожны, если вы используете CollapsingToolbar или другие фичи, зависящие от NestedScroll.
+        //mainRecyclerView.isNestedScrollingEnabled = false
+        mainRecyclerView.setItemViewCacheSize(1024)
         mainRecyclerView.adapter = itemAdapter
         mainRecyclerView.itemAnimator = ItemAnimatorFruit(this)
+
+        // TODO: 23.06.2021 23.8 ItemTouchHelper
+        val simpleItemTouchHelperCallback = SimpleItemTouchHelperCallback(itemAdapter)
+        val simpleItemTouchHelper = ItemTouchHelper(simpleItemTouchHelperCallback)
+        simpleItemTouchHelper.attachToRecyclerView(mainRecyclerView)
+
+        // TODO: 23.06.2021  SnapHelper
+        val linearSnapHelper = LinearSnapHelper()
+        val pageSnapHelper = PagerSnapHelper()
+        //linearSnapHelper.attachToRecyclerView(mainRecyclerView)
+        pageSnapHelper.attachToRecyclerView(mainRecyclerView)
 
         // TODO: 20.06.2021 23.6. Работа со скроллом
         var isLoading = false
