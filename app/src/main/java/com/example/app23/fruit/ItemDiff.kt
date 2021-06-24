@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.DiffUtil
 import com.example.app23.fruit.data.ItemModel
 
 // TODO: 19.06.2021 23.4 DiffUtil 
-class ItemDiff(private val newItemFruit: ArrayList<ItemModel>, private val oldItemFruit: ArrayList<ItemModel>) :
+class ItemDiff(private val newItemFruit: List<ItemModel>, private val oldItemFruit: List<ItemModel>) :
     DiffUtil.Callback() {
     override fun getOldListSize(): Int {
         return oldItemFruit.size

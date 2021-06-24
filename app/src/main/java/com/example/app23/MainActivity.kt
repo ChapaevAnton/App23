@@ -83,17 +83,17 @@ class MainActivity : AppCompatActivity() {
 
         add.setOnClickListener {
 
-            itemAdapter.listItem.add(
+            itemAdapter.items.add(
                 ItemData.getListItem().random()
             )
-            itemAdapter.notifyItemInserted(itemAdapter.listItem.lastIndex)
+            itemAdapter.notifyItemInserted(itemAdapter.items.lastIndex)
             mainRecyclerView.smoothScrollToPosition(itemAdapter.itemCount)
         }
 
         remove.setOnClickListener {
-            if (itemAdapter.listItem.isNotEmpty()) {
-                itemAdapter.listItem.removeLast()
-                itemAdapter.notifyItemRemoved(itemAdapter.listItem.size)
+            if (itemAdapter.items.isNotEmpty()) {
+                itemAdapter.items.removeLast()
+                itemAdapter.notifyItemRemoved(itemAdapter.items.size)
                 mainRecyclerView.smoothScrollToPosition(itemAdapter.itemCount)
             } else Toast.makeText(this, "empty list", Toast.LENGTH_SHORT)
                 .apply { setGravity(Gravity.CENTER, 0, 0) }.show()
@@ -107,21 +107,21 @@ class MainActivity : AppCompatActivity() {
 
             //DiffUtil
             //Вычислить Diff и получить DiffResult:
-            val diffFruit = ItemDiff(ItemData.getListItemUpdate(), itemAdapter.listItem)
+            val diffFruit = ItemDiff(ItemData.getListItemUpdate(), itemAdapter.items)
             val diffResult = DiffUtil.calculateDiff(diffFruit)
 
             //Обновить данные и оповестить об этом RecyclerView:
-            itemAdapter.listItem = ItemData.getListItemUpdate()
+            itemAdapter.items = ItemData.getListItemUpdate()
             diffResult.dispatchUpdatesTo(itemAdapter)
         }
 
         shuffle.setOnClickListener {
-            val shuffleListFruit = ArrayList<ItemModel>(itemAdapter.listItem.shuffled())
+            val shuffleListFruit = ArrayList<ItemModel>(itemAdapter.items.shuffled())
 
-            val diffFruitShuffle = ItemDiff(shuffleListFruit, itemAdapter.listItem)
-            val diffFruitShuffleResult = DiffUtil.calculateDiff(diffFruitShuffle)
-            itemAdapter.listItem.clear()
-            itemAdapter.listItem.addAll(shuffleListFruit)
+            val diffFruitShuffle = ItemDiff(shuffleListFruit, itemAdapter.items)
+                    val diffFruitShuffleResult = DiffUtil.calculateDiff(diffFruitShuffle)
+            itemAdapter.items.clear()
+            itemAdapter.items.addAll(shuffleListFruit)
             diffFruitShuffleResult.dispatchUpdatesTo(itemAdapter)
         }
         // TODO: 21.06.2021 23.6 Практика Up Save Down

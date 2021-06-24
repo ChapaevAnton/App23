@@ -3,7 +3,7 @@ package com.example.app23.fruit
 import com.example.app23.fruit.data.ItemModel
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 
-class ItemAdapter(var listItem: ArrayList<ItemModel>) : ListDelegationAdapter<List<ItemModel>>() {
+class ItemAdapter(listItem: ArrayList<ItemModel>) : ListDelegationAdapter<MutableList<ItemModel>>() {
 
     init {
         delegatesManager.addDelegate(FruitDelegateAdapter())
@@ -12,13 +12,9 @@ class ItemAdapter(var listItem: ArrayList<ItemModel>) : ListDelegationAdapter<Li
         setItems(listItem)
     }
 
-    override fun setItems(items: List<ItemModel>?) {
+    override fun setItems(items: MutableList<ItemModel>?) {
         super.setItems(items)
         notifyDataSetChanged()
-    }
-
-    override fun getItemCount(): Int {
-        return listItem.size
     }
 
     // TODO: 19.06.2021 23.4 Payloads

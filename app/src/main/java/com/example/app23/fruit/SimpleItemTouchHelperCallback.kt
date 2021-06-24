@@ -1,10 +1,13 @@
 package com.example.app23.fruit
 
+import android.util.Log
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.example.app23.fruit.data.ItemModel
 import java.util.*
 
-class SimpleItemTouchHelperCallback(val itemAdapter: ItemAdapter) : ItemTouchHelper.Callback() {
+class SimpleItemTouchHelperCallback(private val itemAdapter: ItemAdapter) : ItemTouchHelper.Callback() {
     override fun getMovementFlags(
         recyclerView: RecyclerView,
         viewHolder: RecyclerView.ViewHolder
@@ -19,7 +22,7 @@ class SimpleItemTouchHelperCallback(val itemAdapter: ItemAdapter) : ItemTouchHel
         viewHolder: RecyclerView.ViewHolder,
         targetHolder: RecyclerView.ViewHolder
     ): Boolean {
-        val items = itemAdapter.listItem
+        val items = itemAdapter.items
         val fromPosition = viewHolder.adapterPosition
         val toPosition = targetHolder.adapterPosition
 
@@ -45,8 +48,20 @@ class SimpleItemTouchHelperCallback(val itemAdapter: ItemAdapter) : ItemTouchHel
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        val items = itemAdapter.listItem
-        items.removeAt(viewHolder.adapterPosition)
-        itemAdapter.notifyItemRemoved(viewHolder.adapterPosition)
+        //DiffUtil
+        val newItems = arrayListOf<ItemModel>()
+        newItems.addAll(itemAdapter.items)
+        newItems.removeAt(viewHolder.adapterPosition)
+
+        val diffItem = ItemDiffSwipe(newItems, itemAdapter.items)
+        val diffResult = DiffUtil.calculateDiff(diffItem)
+
+        itemAdapter.items = newItems
+        diffResult.dispatchUpdatesTo(itemAdapter)
+
+        //itemAdapter.notifyItemRemoved(viewHolder.adapterPosition)
+        Log.d("TEST", "onSwiped: ${itemAdapter.items}")
+
+
     }
 }
